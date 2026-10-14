@@ -8,5 +8,6 @@ pub enum ErrorAutoescuela {
     DniInvalido { error: String },
     ClaseSolapada { error: String },
     AlumnoNoRegistrado { error: String },
-
+    HoraInvalida { error: String },
+    FechaInvalida { error: String },
 }
