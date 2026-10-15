@@ -1,13 +1,39 @@
-#[derive(Debug)]
-pub enum ErrorAutoescuela {
+use std::fmt;
 
-    DireccionInvalida { error: String },
-    CancelacionFueraPlazo { error: String },
-    UbicacionInvalida { error: String },
-    AlumnoDuplicado { error: String },
-    DniInvalido { error: String },
-    ClaseSolapada { error: String },
-    AlumnoNoRegistrado { error: String },
-    HoraInvalida { error: String },
-    FechaInvalida { error: String },
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum ErrorAutoescuela {
+    DireccionInvalida,
+    CancelacionFueraPlazo,
+    UbicacionInvalida,
+    AlumnoDuplicado,
+    DniInvalido,
+    ClaseSolapada,
+    AlumnoNoRegistrado,
 }
+
+impl fmt::Display for ErrorAutoescuela {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let mensaje = match self {
+            Self::DireccionInvalida => {
+                "La dirección proporcionada no es válida (calle y número no pueden estar vacíos)"
+            }
+            Self::CancelacionFueraPlazo => {
+                "La cancelación se realiza fuera del plazo permitido (antes de la hora de inicio)"
+            }
+            Self::UbicacionInvalida => {
+                "La ubicación especificada no es válida (coordenadas fuera de rango o indefinidas)"
+            }
+            Self::AlumnoDuplicado => "El alumno ya se encuentra registrado (DNI duplicado)",
+            Self::DniInvalido => {
+                "El DNI proporcionado no tiene un formato válido (8 dígitos seguidos de una letra)"
+            }
+            Self::ClaseSolapada => {
+                "La clase se solapa con otro horario existente (coincidencia de fechas y horas)"
+            }
+            Self::AlumnoNoRegistrado => "El alumno no se encuentra registrado (DNI no encontrado)",
+        };
+        write!(f, "{}", mensaje)
+    }
+}
+
+impl std::error::Error for ErrorAutoescuela {}
