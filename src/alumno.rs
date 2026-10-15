@@ -1,3 +1,6 @@
+use crate::direccion::Direccion;
+use crate::errores_dominio::ErrorAutoescuela;
+
 pub struct Alumno {
     dni: String,
     nombre: String,
@@ -5,34 +8,29 @@ pub struct Alumno {
 }
 
 impl Alumno {
-    pub fn new(dni: String, nombre: String, direccion: Direccion) -> Result<Self, ErrorAutoescuela> {
-        let valido = dni.len() == 9
-        && dni[..8].chars().all(|c| c.is_ascii_digit())
-        && dni.chars().nth(8).map_or(false, |c| c.is_ascii_alphabetic());
-        
-        
+    pub fn new(
+        dni: String,
+        nombre: String,
+        direccion: Direccion,
+    ) -> Result<Self, ErrorAutoescuela> {
+        let chars: Vec<char> = dni.chars().collect();
+
+        let valido = chars.len() == 9
+            && chars[..8].iter().all(|c| c.is_ascii_digit())
+            && chars[8].is_ascii_alphabetic();
+
         if !valido {
-        
-            return Err(ErrorAutoescuela::DniInvalido {
-            
-            error: format!("'{}' DNI incorrecto, un DNI se compone por 8 cifras y una letra", dni),
-            
-            });
-        
+            return Err(ErrorAutoescuela::DniInvalido);
         }
 
-        Ok(Alumno { dni, nombre, direccion })
+        Ok(Alumno {
+            dni,
+            nombre,
+            direccion,
+        })
     }
 
     pub fn dni(&self) -> &str {
         &self.dni
-    }
-
-    pub fn nombre(&self) -> &str {
-        &self.nombre
-    }
-
-    pub fn direccion(&self) -> &Direccion {
-        &self.direccion
     }
 }
