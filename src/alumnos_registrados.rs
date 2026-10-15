@@ -1,4 +1,6 @@
 use std::collections::HashMap;
+use crate::alumno::Alumno;
+use crate::errores_dominio::ErrorAutoescuela;
 
 pub struct AlumnosRegistrados {
     alumnos: HashMap<String, Alumno>,
@@ -6,16 +8,16 @@ pub struct AlumnosRegistrados {
 
 impl AlumnosRegistrados {
     pub fn new() -> Self {
-        AlumnosRegistrados { alumnos: HashMap::new() }
+        AlumnosRegistrados {
+            alumnos: HashMap::new(),
+        }
     }
 
     pub fn registrar(&mut self, alumno: Alumno) -> Result<(), ErrorAutoescuela> {
         let dni = alumno.dni().to_string();
 
         if self.alumnos.contains_key(&dni) {
-            return Err(ErrorAutoescuela::AlumnoDuplicado {
-                error: format!("Ya existe un alumno registrado con el DNI {}", dni),
-            });
+            return Err(ErrorAutoescuela::AlumnoDuplicado);
         }
 
         self.alumnos.insert(dni, alumno);
