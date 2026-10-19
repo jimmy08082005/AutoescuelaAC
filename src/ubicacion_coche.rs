@@ -1,14 +1,18 @@
-use std::time::SystemTime;
 use crate::errores_dominio::ErrorAutoescuela;
+use std::time::SystemTime;
 
-pub struct Ubicacion {
+pub struct UbicacionCoche {
     latitud: f64,
     longitud: f64,
     instante: SystemTime,
 }
 
-impl Ubicacion {
-    pub fn new(latitud: f64, longitud: f64, instante: SystemTime) -> Result<Self, ErrorAutoescuela> {
+impl UbicacionCoche {
+    pub fn new(
+        latitud: f64,
+        longitud: f64,
+        instante: SystemTime,
+    ) -> Result<Self, ErrorAutoescuela> {
         if latitud.is_nan() || longitud.is_nan() {
             return Err(ErrorAutoescuela::UbicacionInvalida);
         }
@@ -21,7 +25,7 @@ impl Ubicacion {
             return Err(ErrorAutoescuela::UbicacionInvalida);
         }
 
-        Ok(Ubicacion {
+        Ok(UbicacionCoche {
             latitud,
             longitud,
             instante,
