@@ -29,8 +29,4 @@ impl Alumno {
             direccion,
         })
     }
-
-    pub fn dni(&self) -> &str {
-        &self.dni
-    }
 }
