@@ -1,10 +1,9 @@
-use std::time::SystemTime;
 use crate::errores_dominio::ErrorAutoescuela;
 use crate::estado_clase::EstadoClase;
+use std::time::SystemTime;
 
 pub struct Clase {
     hora_inicio: SystemTime,
-    duracion: u32,
     dni_alumno: String,
     estado: EstadoClase,
 }
@@ -13,7 +12,6 @@ impl Clase {
     pub fn new(hora_inicio: SystemTime, dni_alumno: String) -> Self {
         Clase {
             hora_inicio,
-            duracion: 45,
             dni_alumno,
             estado: EstadoClase::new_activa(),
         }
@@ -21,10 +19,6 @@ impl Clase {
 
     pub fn hora_inicio(&self) -> &SystemTime {
         &self.hora_inicio
-    }
-
-    pub fn dni_alumno(&self) -> &str {
-        &self.dni_alumno
     }
 
     pub fn cancelar(&mut self, instante_aviso: SystemTime) -> Result<(), ErrorAutoescuela> {
