@@ -70,15 +70,13 @@ La configuración del entorno de desarrollo se detalla en [CONFIGURACION.md](CON
 
 ## Lenguaje de Programación
 
-Se ha optado por utilizar Rust, en concreto la versión 1.99.0, por los siguientes motivos:
+Se ha optado por utilizar Rust, por los siguientes motivos:
 
 - Inmutabilidad para "Value Objects": en Rust, las variables son inmutables por defecto, facilitando el diseño.
 
 - Tipado "fuerte" y comprobación en tiempo de compilación: Rust tiene un tipado estricto y estático, no incluye el valor "null", es decir, se elimina la noción de puntero nulo, se deben declarar tipos explícitos para representar que algo no exista.
 
 - Modelado: Rust permite modelar de forma muy expresiva cambios de estado con "enums", algo que viene muy bien cuando haya que representar la cancelación de las clases prácticas.
-
-- Hora de inicio de la clase: con Rust, para representar las horas del día sin dependencias externas, es necesario utilizar "std::time::SystemTime" como instantes de tiempo con los que calcular las horas.
 
 - Gestión de Errores: en Rust los constructores devuelven "Result<Self, Error>", por lo que invariantes del dominio se comprueban sin excepciones.
 
