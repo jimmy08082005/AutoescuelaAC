@@ -2,28 +2,22 @@ use crate::alumnos_registrados::AlumnosRegistrados;
 use crate::clase::Clase;
 use crate::errores_dominio::ErrorAutoescuela;
 use crate::ubicacion_coche::UbicacionCoche;
-use std::collections::HashMap;
+use std::collections::BTreeMap;
+use std::ops::Bound::Excluded;
 use std::time::{Duration, SystemTime};
 
 const DURACION_CLASE_SEGUNDOS: u64 = 45 * 60;
 
 pub struct Agenda {
-    clases: HashMap<SystemTime, Clase>,
-    ubicacion_coche: UbicacionCoche,
-}
-
-fn diferencia_absoluta(a: SystemTime, b: SystemTime) -> Duration {
-    match a.duration_since(b) {
-        Ok(d) => d,
-        Err(e) => e.duration(),
-    }
+    clases: BTreeMap<SystemTime, Clase>,
+    ubicacion_coche: Option<UbicacionCoche>,
 }
 
 impl Agenda {
     pub fn new() -> Self {
         Agenda {
-            clases: HashMap::new(),
-            ubicacion_coche: UbicacionCoche::new(0.0, 0.0, SystemTime::now()).unwrap(),
+            clases: BTreeMap::new(),
+            ubicacion_coche: None,
         }
     }
 
@@ -37,11 +31,20 @@ impl Agenda {
             return Err(ErrorAutoescuela::AlumnoNoRegistrado);
         }
 
-        for existente in self.clases.values() {
-            let diferencia = diferencia_absoluta(hora_inicio, *existente.hora_inicio());
-            if diferencia < Duration::from_secs(DURACION_CLASE_SEGUNDOS) {
-                return Err(ErrorAutoescuela::ClaseSolapada);
-            }
+        let margen = Duration::from_secs(DURACION_CLASE_SEGUNDOS);
+        let desde = hora_inicio
+            .checked_sub(margen)
+            .unwrap_or(SystemTime::UNIX_EPOCH);
+        let hasta = hora_inicio + margen;
+
+        if self
+            .clases
+            .range((Excluded(desde), Excluded(hora_inicio)))
+            .next()
+            .is_some()
+            || self.clases.range(hora_inicio..hasta).next().is_some()
+        {
+            return Err(ErrorAutoescuela::ClaseSolapada);
         }
 
         let clase = Clase::new(hora_inicio, dni_alumno);
@@ -56,7 +59,7 @@ impl Agenda {
         instante: SystemTime,
     ) -> Result<(), ErrorAutoescuela> {
         let ubicacion = UbicacionCoche::new(latitud, longitud, instante)?;
-        self.ubicacion_coche = ubicacion;
+        self.ubicacion_coche = Some(ubicacion);
         Ok(())
     }
 }
