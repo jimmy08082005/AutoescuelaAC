@@ -17,10 +17,6 @@ impl Clase {
         }
     }
 
-    pub fn hora_inicio(&self) -> &SystemTime {
-        &self.hora_inicio
-    }
-
     pub fn cancelar(&mut self, instante_aviso: SystemTime) -> Result<(), ErrorAutoescuela> {
         if instante_aviso >= self.hora_inicio {
             return Err(ErrorAutoescuela::CancelacionFueraPlazo);
