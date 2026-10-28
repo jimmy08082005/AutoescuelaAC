@@ -29,7 +29,4 @@ impl AlumnosRegistrados {
         Ok(())
     }
 
-    pub fn existe(&self, dni: &str) -> bool {
-        self.alumnos.contains_key(dni)
-    }
 }
