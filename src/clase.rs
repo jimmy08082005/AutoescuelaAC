@@ -9,7 +9,7 @@ pub struct Clase {
 }
 
 impl Clase {
-    pub fn new(hora_inicio: SystemTime, dni_alumno: String) -> Self {
+    pub(crate) fn new(hora_inicio: SystemTime, dni_alumno: String) -> Self {
         Clase {
             hora_inicio,
             dni_alumno,
