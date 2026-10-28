@@ -27,10 +27,6 @@ impl Agenda {
         dni_alumno: String,
         alumnos: &AlumnosRegistrados,
     ) -> Result<(), ErrorAutoescuela> {
-        if !alumnos.existe(&dni_alumno) {
-            return Err(ErrorAutoescuela::AlumnoNoRegistrado);
-        }
-
         let margen = Duration::from_secs(DURACION_CLASE_SEGUNDOS);
         let desde = hora_inicio
             .checked_sub(margen)
