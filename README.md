@@ -70,13 +70,5 @@ La configuración del entorno de desarrollo se detalla en [CONFIGURACION.md](CON
 
 ## Lenguaje de Programación
 
-Se ha optado por utilizar Rust, por los siguientes motivos:
-
-- Inmutabilidad para "Value Objects": en Rust, las variables son inmutables por defecto, facilitando el diseño.
-
-- Tipado "fuerte" y comprobación en tiempo de compilación: Rust tiene un tipado estricto y estático, no incluye el valor "null", es decir, se elimina la noción de puntero nulo, se deben declarar tipos explícitos para representar que algo no exista.
-
-- Modelado: Rust permite modelar de forma muy expresiva cambios de estado con "enums", algo que viene muy bien cuando haya que representar la cancelación de las clases prácticas.
-
-- Gestión de Errores: en Rust los constructores devuelven "Result<Self, Error>", por lo que invariantes del dominio se comprueban sin excepciones.
+Se ha optado por utilizar Rust, siendo la principal razón la expresividad que tiene para realizar los modelos de las entidades del dominio. Por ejemplo, el estado de una clase práctica se puede representar muy bien con un "enum". Además, el estado de la clase tiene un atributo que necesita otro obligatoriamente pero no es necesario sin él, concepto que se puede representar de manera intuitiva en Rust. El tipado "fuerte" y la comprobación en tiempo de compilación también ayudan a la hora de declarar los tipos de los modelos y evitar errores en tiempo de ejecución.
 
