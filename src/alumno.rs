@@ -8,7 +8,7 @@ pub struct Alumno {
 }
 
 impl Alumno {
-    pub fn new(
+    pub(crate) fn new(
         dni: String,
         nombre: String,
         direccion: Direccion,
