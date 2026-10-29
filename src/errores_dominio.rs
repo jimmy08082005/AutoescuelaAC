@@ -3,7 +3,6 @@ use std::fmt;
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ErrorAutoescuela {
     DireccionInvalida,
-    CancelacionFueraPlazo,
     UbicacionInvalida,
     ClaseSolapada,
 }
@@ -13,9 +12,6 @@ impl fmt::Display for ErrorAutoescuela {
         let mensaje = match self {
             Self::DireccionInvalida => {
                 "La dirección proporcionada no es válida (calle y número no pueden estar vacíos)"
-            }
-            Self::CancelacionFueraPlazo => {
-                "La cancelación se realiza fuera del plazo permitido (antes de la hora de inicio)"
             }
             Self::UbicacionInvalida => {
                 "La ubicación especificada no es válida (coordenadas fuera de rango o indefinidas)"
