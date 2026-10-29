@@ -70,5 +70,10 @@ La configuración del entorno de desarrollo se detalla en [CONFIGURACION.md](CON
 
 ## Lenguaje de Programación
 
-Se ha optado por utilizar Rust, siendo la principal razón la expresividad que tiene para realizar los modelos de las entidades del dominio. Por ejemplo, el estado de una clase práctica se puede representar muy bien con un "enum". Además, el estado de la clase tiene un atributo que necesita otro obligatoriamente pero no es necesario sin él, concepto que se puede representar de manera intuitiva en Rust. El tipado "fuerte" y la comprobación en tiempo de compilación también ayudan a la hora de declarar los tipos de los modelos y evitar errores en tiempo de ejecución.
+Se ha optado por utilizar Rust por los siguientes motivos:
+
+- El compilador impide construir un estado inconsistente. El estado de una clase necesita un aviso de cancelación pero solo si la clase esta cancelada, algo que permite con Option, resolviendo la inconsistencia
+de tener un instante de aviso de cancelación con una clase que no se ha cancelado.
+
+- Tipado "fuerte" y comprobación en tiempo de compilación. En el caso de Option<UbicacionCoche> en Agenda fuerza a gestionar explicitamente el caso en el que no haya llegado ninguna lectura de la ubicación, rechazando el compilador el código si no se comprueba esto. Ademas corrige incompatibilidades con los tipos antes de ejecutar el código.
 
