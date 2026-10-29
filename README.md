@@ -73,7 +73,15 @@ La configuración del entorno de desarrollo se detalla en [CONFIGURACION.md](CON
 Se ha optado por utilizar Rust por los siguientes motivos:
 
 - El compilador impide construir un estado inconsistente. El estado de una clase necesita un aviso de cancelación pero solo si la clase esta cancelada, algo que permite con Option, resolviendo la inconsistencia
-de tener un instante de aviso de cancelación con una clase que no se ha cancelado.
+de tener un instante de aviso de cancelación con una clase que no se ha cancelado. Es decir, la variante cancelada es la que necesita un atributo adicional dentro de la estructura del estado de la clase, un "enum".
 
-- Tipado "fuerte" y comprobación en tiempo de compilación. En el caso de Option<UbicacionCoche> en Agenda fuerza a gestionar explicitamente el caso en el que no haya llegado ninguna lectura de la ubicación, rechazando el compilador el código si no se comprueba esto. Ademas corrige incompatibilidades con los tipos antes de ejecutar el código.
+- Frente a otros lenguajes que se han barajado, como Go o Java, Rust tiene inmutabilidad por defecto, clave en
+los objetos valor (son inmutables). 
+
+- Mientras que Java tiene "null" y Go "nil", Rust debe gestionar los tipo Option pues si no el código no compila.
+
+- En Go se pueden descartar errores y compilar sin avisos, mientras que en Rust, al ignorar un "Result" salta un aviso.
+
+- Por último, Rust evita "data races", algo necesario al poder consultar tanto profesores como alumnos la aplicación en la nube a la vez
+
 
