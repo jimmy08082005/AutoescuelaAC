@@ -7,7 +7,7 @@ pub struct Direccion {
 }
 
 impl Direccion {
-    pub fn new(
+    pub(crate) fn new(
         calle: String,
         numero: String,
         piso: Option<String>,
