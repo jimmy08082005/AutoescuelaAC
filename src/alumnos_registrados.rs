@@ -25,7 +25,7 @@ impl AlumnosRegistrados {
     ) -> Result<u32, ErrorAutoescuela> {
         let id = self.siguiente_id;
         let direccion = Direccion::new(calle, numero, piso)?;
-        let alumno = Alumno::new(nombre, direccion)?;
+        let alumno = Alumno::new(nombre, direccion);
         self.alumnos.insert(id, alumno);
         self.siguiente_id += 1;
         Ok(id)
