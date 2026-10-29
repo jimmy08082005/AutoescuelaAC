@@ -8,7 +8,7 @@ pub struct UbicacionCoche {
 }
 
 impl UbicacionCoche {
-    pub fn new(
+    pub(crate) fn new(
         latitud: f64,
         longitud: f64,
         instante: SystemTime,
