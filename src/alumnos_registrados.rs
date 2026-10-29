@@ -1,5 +1,5 @@
 use crate::alumno::Alumno;
-use crate::direccion::{self, Direccion};
+use crate::direccion::Direccion;
 use crate::errores_dominio::ErrorAutoescuela;
 use std::collections::HashMap;
 
