@@ -5,8 +5,6 @@ pub enum ErrorAutoescuela {
     DireccionInvalida,
     CancelacionFueraPlazo,
     UbicacionInvalida,
-    AlumnoDuplicado,
-    DniInvalido,
     ClaseSolapada,
 }
 
@@ -21,10 +19,6 @@ impl fmt::Display for ErrorAutoescuela {
             }
             Self::UbicacionInvalida => {
                 "La ubicación especificada no es válida (coordenadas fuera de rango o indefinidas)"
-            }
-            Self::AlumnoDuplicado => "El alumno ya se encuentra registrado (DNI duplicado)",
-            Self::DniInvalido => {
-                "El DNI proporcionado no tiene un formato válido (8 dígitos seguidos de una letra)"
             }
             Self::ClaseSolapada => {
                 "La clase se solapa con otro horario existente (coincidencia de fechas y horas o no han pasado 45 minutos entre clases)"
