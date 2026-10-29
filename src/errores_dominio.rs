@@ -8,7 +8,6 @@ pub enum ErrorAutoescuela {
     AlumnoDuplicado,
     DniInvalido,
     ClaseSolapada,
-    AlumnoNoRegistrado,
 }
 
 impl fmt::Display for ErrorAutoescuela {
@@ -28,9 +27,8 @@ impl fmt::Display for ErrorAutoescuela {
                 "El DNI proporcionado no tiene un formato válido (8 dígitos seguidos de una letra)"
             }
             Self::ClaseSolapada => {
-                "La clase se solapa con otro horario existente (coincidencia de fechas y horas)"
+                "La clase se solapa con otro horario existente (coincidencia de fechas y horas o no han pasado 45 minutos entre clases)"
             }
-            Self::AlumnoNoRegistrado => "El alumno no se encuentra registrado (DNI no encontrado)",
         };
         write!(f, "{}", mensaje)
     }
