@@ -1,5 +1,5 @@
 use crate::alumno::Alumno;
-use crate::direccion::Direccion;
+use crate::direccion::{self, Direccion};
 use crate::errores_dominio::ErrorAutoescuela;
 use std::collections::HashMap;
 
@@ -19,9 +19,12 @@ impl AlumnosRegistrados {
     pub fn registrar(
         &mut self,
         nombre: String,
-        direccion: Direccion,
+        calle: String,
+        numero: String,
+        piso: Option<String>,
     ) -> Result<u32, ErrorAutoescuela> {
         let id = self.siguiente_id;
+        let direccion = Direccion::new(calle, numero, piso)?;
         let alumno = Alumno::new(nombre, direccion)?;
         self.alumnos.insert(id, alumno);
         self.siguiente_id += 1;
