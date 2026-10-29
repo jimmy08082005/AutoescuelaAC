@@ -25,7 +25,6 @@ impl Agenda {
         &mut self,
         hora_inicio: SystemTime,
         dni_alumno: String,
-        alumnos: &AlumnosRegistrados,
     ) -> Result<(), ErrorAutoescuela> {
         let margen = Duration::from_secs(DURACION_CLASE_SEGUNDOS);
         let desde = hora_inicio
