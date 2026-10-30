@@ -72,12 +72,12 @@ La configuración del entorno de desarrollo se detalla en [CONFIGURACION.md](CON
 
 Se ha optado por utilizar Rust por los siguientes motivos:
 
-- Compilador evita inconsistencias. El estado de una clase se representa como un "Enum", con dos variantes, activa y cancelada. Una clase cancelada necesita almacenar el instante en el que se canceló, mientras que una clase activa no. Para evitar un instante en una clase activa, Rust permite modelizar esto como Cancelada { instante_aviso: SystemTime }, evitando inconsistencias.
+- El compilador evita inconsistencias. El estado de una clase se representa como un "Enum", con dos variantes, activa y cancelada. Una clase cancelada necesita almacenar el instante en el que se canceló, mientras que una clase activa no. Para evitar un instante en una clase activa, Rust permite modelizar esto como Cancelada { instante_aviso: SystemTime }, evitando inconsistencias.
 
 - Frente a otros lenguajes que se han barajado, como Go o Java, Rust tiene inmutabilidad por defecto, clave en
 los objetos valor (son inmutables). 
 
-- Mientras que Java tiene "null" y Go "nil", Rust debe gestionar los tipo Option pues si no el código no compila.
+- Mientras que Java tiene "null" y Go "nil", Rust debe gestionar los tipos Option pues si no el código no compila.
 
 - En Go se pueden descartar errores y compilar sin avisos, mientras que en Rust, al ignorar un "Result" salta un aviso.
 
