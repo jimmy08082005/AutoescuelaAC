@@ -53,7 +53,7 @@ impl Agenda {
         longitud: f64,
         instante: SystemTime,
     ) -> Result<(), ErrorAutoescuela> {
-        let ubicacion = UbicacionCoche::new(latitud, longitud, instante)?;
+        let ubicacion = UbicacionCoche::new(latitud, longitud, instante);
         self.ubicacion_coche = Some(ubicacion);
         Ok(())
     }
