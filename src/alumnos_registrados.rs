@@ -24,13 +24,12 @@ impl AlumnosRegistrados {
         nombre: String,
         calle: String,
         numero: String,
-        piso: Option<String>,
-    ) -> Result<IdAlumno, ErrorAutoescuela> {
+    ) -> IdAlumno {
         let id = IdAlumno(self.siguiente_id);
-        let direccion = Direccion::new(calle, numero, piso)?;
+        let direccion = Direccion::new(calle, numero);
         let alumno = Alumno::new(nombre, direccion);
         self.alumnos.insert(id, alumno);
         self.siguiente_id += 1;
-        Ok(id)
+        id
     }
 }
