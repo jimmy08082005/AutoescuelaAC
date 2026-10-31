@@ -17,9 +17,8 @@ impl Agenda {
         }
     }
 
-    pub fn agregar_clase(&mut self, hora_inicio: SystemTime, id_alumno: IdAlumno) -> SystemTime {
+    pub fn agregar_clase(&mut self, hora_inicio: SystemTime, id_alumno: IdAlumno) {
         self.clases.insert(hora_inicio, Clase::new(id_alumno));
-        hora_inicio
     }
 
     pub fn modificar_ubicacion_coche(&mut self, latitud: f64, longitud: f64, instante: SystemTime) {
