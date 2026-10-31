@@ -1,16 +1,16 @@
 use crate::alumnos_registrados::IdAlumno;
-use crate::estado_clase::EstadoClase;
+use std::time::SystemTime;
 
 pub struct Clase {
     alumno_id: IdAlumno,
-    estado: EstadoClase,
+    aviso_cancelacion: Option<SystemTime>,
 }
 
 impl Clase {
     pub(crate) fn new(alumno_id: IdAlumno) -> Self {
         Clase {
             alumno_id,
-            estado: EstadoClase::new_activa(),
+            aviso_cancelacion: None,
         }
     }
 }
