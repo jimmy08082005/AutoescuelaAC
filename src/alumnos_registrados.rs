@@ -3,8 +3,11 @@ use crate::direccion::Direccion;
 use crate::errores_dominio::ErrorAutoescuela;
 use std::collections::HashMap;
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub struct IdAlumno(u32);
+
 pub struct AlumnosRegistrados {
-    alumnos: HashMap<u32, Alumno>,
+    alumnos: HashMap<IdAlumno, Alumno>,
     siguiente_id: u32,
 }
 
@@ -22,8 +25,8 @@ impl AlumnosRegistrados {
         calle: String,
         numero: String,
         piso: Option<String>,
-    ) -> Result<u32, ErrorAutoescuela> {
-        let id = self.siguiente_id;
+    ) -> Result<IdAlumno, ErrorAutoescuela> {
+        let id = IdAlumno(self.siguiente_id);
         let direccion = Direccion::new(calle, numero, piso)?;
         let alumno = Alumno::new(nombre, direccion);
         self.alumnos.insert(id, alumno);

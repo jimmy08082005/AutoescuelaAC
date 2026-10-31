@@ -1,3 +1,4 @@
+use crate::alumnos_registrados::IdAlumno;
 use crate::clase::Clase;
 use crate::errores_dominio::ErrorAutoescuela;
 use crate::ubicacion_coche::UbicacionCoche;
@@ -23,7 +24,7 @@ impl Agenda {
     pub fn agregar_clase(
         &mut self,
         hora_inicio: SystemTime,
-        id_alumno: u32,
+        id_alumno: IdAlumno,
     ) -> Result<(), ErrorAutoescuela> {
         let margen = Duration::from_secs(DURACION_CLASE_SEGUNDOS);
         let desde = hora_inicio
